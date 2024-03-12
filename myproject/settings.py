@@ -80,7 +80,8 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'password',
         'HOST': 'skr-cleansing-db.cluster-cnuupdm1vvla.ap-southeast-1.rds.amazonaws.com', 
-        'PORT': '5432',      
+        'PORT': '5432',
+        'SCHEMA': 'demo'     
     }
 }
 

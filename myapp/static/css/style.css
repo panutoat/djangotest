@@ -50,24 +50,7 @@ section{
   color: #96c7e8;
   font-size: 70px;
 }
-#Home{
-  background: #fff;
-}
-#About{
-  background: #f2f2f2;
-}
-#Category{
-  background: #e6e6e6;
-}
-#Latest{
-  background: #fff;
-}
-#Contact{
-  background: #f2f2f2;
-}
-#Feedback{
-  background: #e6e6e6;
-}
+
 .button a{
   position: fixed;
   bottom: 20px;

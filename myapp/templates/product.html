@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="data-grid-container">
+    <button class="add-button">
+        <span class="fa fa-plus"></span> Add
+    </button>
+    <table class="container">
+        <thead>
+            <tr>
+                <th><h1>product_code</h1></th>
+                <th><h1>product_name</h1></th>
+                <th><h1>product_type</h1></th>
+                <th><h1>amount</h1></th>
+                <th><h1>Actions</h1></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row.product_code }}</td>
+                <td>{{ row.product_name }}</td>
+                <td>{{ row.product_type }}</td>
+                <td>{{ row.amount }}</td>
+                <td>
+                    <button>
+                        <span class="fa fa-edit"></span>
+                    </button>
+                    <button>
+                        <span class="fa fa-trash"></span>
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
