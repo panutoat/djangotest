@@ -1,38 +1,68 @@
-{% extends 'base.html' %}
-
-{% block content %}
-<div class="data-grid-container">
-    <button class="add-button">
-        <span class="fa fa-plus"></span> Add
-    </button>
-    <table class="container">
-        <thead>
-            <tr>
-                <th><h1>product_code</h1></th>
-                <th><h1>product_name</h1></th>
-                <th><h1>product_type</h1></th>
-                <th><h1>amount</h1></th>
-                <th><h1>Actions</h1></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in data %}
-            <tr>
-                <td>{{ row.product_code }}</td>
-                <td>{{ row.product_name }}</td>
-                <td>{{ row.product_type }}</td>
-                <td>{{ row.amount }}</td>
-                <td>
-                    <button>
-                        <span class="fa fa-edit"></span>
-                    </button>
-                    <button>
-                        <span class="fa fa-trash"></span>
-                    </button>
-                </td>
-            </tr>
+<!-- templates/product.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Django App</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/product.css' %}">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="data-grid-container">
+        <button class="add-button">
+            <span class="fa fa-plus"></span> Add
+        </button>
+        <table class="container">
+            <thead>
+                <tr>
+                    <th>Product code</th>
+                    <th>Product name</th>
+                    <th>Product type</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in page_obj %}
+                <tr>
+                    <td>{{ row.product_code }}</td>
+                    <td>{{ row.product_name }}</td>
+                    <td>{{ row.product_type }}</td>
+                    <td>{{ row.amount }}</td>
+                    <td>
+                        <button>
+                            <span class="fa fa-edit"></span>
+                        </button>
+                        <button>
+                            <span class="fa fa-trash"></span>
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if page_obj.has_other_pages %}
+        <ul class="pagination modal-1">
+            {% if page_obj.has_previous %}
+                <li><a href="?page=1" class="prev">&laquo;</a></li>
+                <li><a href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+            {% endif %}
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <li><a href="#" class="active">{{ num }}</a></li>
+                {% else %}
+                    {% if forloop.counter0 < 4 or forloop.revcounter0 < 4 or num == page_obj.paginator.num_pages %}
+                        <li><a href="?page={{ num }}">{{ num }}</a></li>
+                    {% endif %}
+                {% endif %}
             {% endfor %}
-        </tbody>
-    </table>
-</div>
-{% endblock %}
+            {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                <li><a href="?page={{ page_obj.paginator.num_pages }}" class="next">&raquo;</a></li>
+            {% endif %}
+        </ul>
+        {% endif %}
+    </div>
+</body>
+</html>

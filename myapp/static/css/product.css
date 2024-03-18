@@ -1,0 +1,134 @@
+
+
+table {
+    margin: 25px auto;
+    border-collapse: collapse;
+    border: 1px solid #eee;
+    border-bottom: 2px solid #00cccc;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.10),
+                0px 10px 20px rgba(0, 0, 0, 0.05),
+                0px 20px 20px rgba(0, 0, 0, 0.05),
+                0px 30px 20px rgba(0, 0, 0, 0.05);
+  }
+  
+  table tr:hover {
+    background: #f4f4f4;
+  }
+  
+  table tr:hover td {
+    color: #555;
+  }
+  
+  table th,
+  table td {
+    color: #999;
+    border: 1px solid #eee;
+    padding: 12px 35px;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  
+  table th {
+    background: #00cccc;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+  
+  table th.last {
+    border-right: none;
+  }
+  .popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px; /* ปรับขนาดตามที่ต้องการ */
+    height: 300px; /* ปรับขนาดตามที่ต้องการ */
+    background-color: rgba(255, 255, 255, 0.9); /* ปรับสีพื้นหลังตามที่ต้องการ */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popup-inner {
+    padding: 20px; /* ปรับระยะห่างขอบภายในของป๊อปอัพ */
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+  }
+  .data-grid-container {
+    position: relative;
+  }
+  
+  .add-button {
+    position: relative;
+    top: 0;
+    left:  400px;
+  }
+
+  
+
+.pagination {
+    list-style: none;
+    display: inline-block;
+    padding: 0;
+    margin-top: 10px;
+  }
+  .pagination li {
+    display: inline;
+    text-align: center;
+  }
+  .pagination a {
+    float: left;
+    display: block;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 5px 12px;
+    color: #fff;
+    margin-left: -1px;
+    border: 1px solid transparent;
+    line-height: 1.5;
+  }
+  .pagination a.active {
+    cursor: default;
+  }
+  .pagination a:active {
+    outline: none;
+  }
+  
+  .modal-1 li:first-child a {
+    -moz-border-radius: 6px 0 0 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px 0 0 6px;
+  }
+  .modal-1 li:last-child a {
+    -moz-border-radius: 0 6px 6px 0;
+    -webkit-border-radius: 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .modal-1 a {
+    border-color: #ddd;
+    color: #4285F4;
+    background: #fff;
+  }
+  .modal-1 a:hover {
+    background: #eee;
+  }
+  .modal-1 a.active, .modal-1 a:active {
+    border-color: #4285F4;
+    background: #4285F4;
+    color: #fff;
+  }
+  
+  
+  

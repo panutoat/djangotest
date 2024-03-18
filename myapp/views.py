@@ -5,6 +5,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator
+from django.core.cache import cache
+from django.db import connection
 from .forms import LoginForm
 from . database import * 
 
@@ -59,7 +62,19 @@ def user_logout(request):
     return redirect('home')    
 
 
+
+
 def product(request):
-    data = query_db('select * from  demo.tb_product limit 100')
-    
-    return render(request, 'product.html', {'data': data})
+    cached_data = cache.get('product_data')
+    if cached_data:
+        data = cached_data
+    else:
+        data = query_db('select * from demo.tb_product')
+        cache.set('product_data', data, timeout=3600)
+
+    paginator = Paginator(data, 10) 
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'product.html', {'page_obj': page_obj})
