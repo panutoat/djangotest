@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'myproject.urls'
+ROOT_URLCONF = 'djangotest.urls'
 
 TEMPLATES = [
     {
@@ -67,9 +67,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'myproject.wsgi.application'
+WSGI_APPLICATION = 'djangotest.wsgi.application'
 
-
+LOGIN_URL = '/login/'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 

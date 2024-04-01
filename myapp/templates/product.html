@@ -1,4 +1,5 @@
 <!-- templates/product.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,8 @@
     <title>My Django App</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/product.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/popup.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     {% include 'navbar.html' %}
@@ -13,32 +16,79 @@
         <button class="add-button">
             <span class="fa fa-plus"></span> Add
         </button>
+        <div id="popup-container" class="popup-container" style="display: none;">
+            <div class="popup-content">
+                <div className="popup-inner">
+                    <h2 className="edit-user-title">ADD Product: </h2>
+                    <form method="post" action="{% url 'add_product' %}">
+                        {% csrf_token %}
+                        <label class="form-label">Product code:</label>
+                        <input type="text" name="product_code" class="form-input" />
+                        <br/>
+                        <label class="form-label">Product name:</label>
+                        <input type="text" name="product_name" class="form-input" />
+                        <br/>
+                        <label class="form-label">Product type:</label>
+                        <input type="text" name="product_type" class="form-input"/>
+                        <br/>
+                        <label class="form-label">Amount:</label>
+                        <input type="text" name="amount" class="form-input"/>
+                        <br/>
+                        <button type="submit" class="save-button" >Save</button>
+                    </form>
+                    <span class="close">&times;</span>
+                </div>
+            </div>
+        </div>
+        <form method="GET" action="{% url 'product' %}">
+            <label for="search">Search by Product code:</label>
+            <input type="text" id="search" name="product_code">
+            <button type="submit">Search</button>
+        </form>
         <table class="container">
             <thead>
                 <tr>
-                    <th>Product code</th>
-                    <th>Product name</th>
-                    <th>Product type</th>
-                    <th>Amount</th>
+                    <th><a href="?sort=product_code">Product code</a></th>
+                    <th><a href="?sort=product_name">Product name</a></th>
+                    <th><a href="?sort=product_type">Product type</a></th>
+                    <th><a href="?sort=amount">Amount</a></th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for row in page_obj %}
-                <tr>
-                    <td>{{ row.product_code }}</td>
-                    <td>{{ row.product_name }}</td>
-                    <td>{{ row.product_type }}</td>
-                    <td>{{ row.amount }}</td>
-                    <td>
-                        <button>
-                            <span class="fa fa-edit"></span>
-                        </button>
-                        <button>
-                            <span class="fa fa-trash"></span>
-                        </button>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>{{ row.product_code }}</td>
+                        <td>{{ row.product_name }}</td>
+                        <td>{{ row.product_type }}</td>
+                        <td>{{ row.amount }}</td>
+                        <td>
+                            <button class="edit-button" onclick="openEditPopup('{{ row.product_code }}', '{{ row.product_name }}', '{{ row.product_type }}', '{{ row.amount }}')"><i class="fa fa-edit"></i></button>
+                        </td>
+                        <div id="edit-popup-container" class="popup-container" style="display: none;">
+                            <div class="popup-content">
+                                <div className="popup-inner">
+                                    <h2 className="edit-user-title">Edit Product: </h2>
+                                    <form method="post" action="{% url 'edit_product' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" id="edit-product-code" name="product_code" class="form-input" />
+                                        <br/>
+                                        <label class="form-label">Product name:</label>
+                                        <input type="text" id="edit-product-name" name="product_name" class="form-input" />
+                                        <br/>
+                                        <label class="form-label">Product type:</label>
+                                        <input type="text" id="edit-product-type" name="product_type" class="form-input"/>
+                                        <br/>
+                                        <label class="form-label">Amount:</label>
+                                        <input type="text" id="edit-amount" name="amount" class="form-input"/>
+                                        <br/>
+                                        <button type="submit" class="save-button" >Save</button>
+                                    </form>
+                                    <span class="close">&times;</span>
+                                </div>
+                            </div>
+                        </div>                        
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>
@@ -64,5 +114,6 @@
         </ul>
         {% endif %}
     </div>
+    <script src="{% static 'js/popup.js' %}"></script>
 </body>
 </html>

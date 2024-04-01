@@ -1,0 +1,17 @@
+<div id="popup-container" className="popup-container">
+    <div className="popup-inner">
+      <h2 className="edit-user-title">Edit product_code: {product_code}</h2>
+      <label className="form-label">product_name:</label>
+      <input type="text" className="form-input" value={product_name}  />
+      <br/>
+      <label className="form-label">product_type:</label>
+      <input type="text" className="form-input" value={product_type}  />
+      <br/>
+      <label className="form-label">amount:</label>
+      <input type="text" className="form-input" value={amount} />
+      <br/>
+      <button className="save-button" onClick={handleSubmit}>Save</button>
+      <button className="cancel-button" onClick={onClose}>Cancel</button>
+
+    </div>
+  </div>
